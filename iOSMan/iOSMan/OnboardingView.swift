@@ -14,6 +14,8 @@ struct OnboardingView: View {
     @State var askGithubUserName: Bool = false
     @State var isNotValidGitHubAccount: Bool = false
     @State var askUserInformation: Bool = false
+    @State var githubUserNameIsNotEmpty: Bool = false
+    @State var showLoading: Bool = false
     @AppStorage("githubUserName") var githubUserName = ""
     var body: some View {
         VStack{
@@ -41,7 +43,7 @@ struct OnboardingView: View {
                     .foregroundColor(.secondary)
             }
             if askGithubUserName {
-                Text("Please enter your GitHub user name (Optional)")
+                Text("Please enter your GitHub user name")
                     .fontWeight(.bold)
                     .font(.largeTitle)
                 TextField("Enter your GitHub user name here", text: $githubUserName)
@@ -54,37 +56,74 @@ struct OnboardingView: View {
                         if githubUserName.isEmpty {
                             print("Not Github User")
                         } else {
-                            let url = URL(string: "https://github.com/\(githubUserName)")!
-                            
-                            let task = URLSession.shared.dataTask(with: url) { data, response, error in
-                                guard let response = response as? HTTPURLResponse else {
-                                    print("No response or response is not an HTTPURLResponse")
-                                    return
-                                }
-                                
-                                print("HTTP response status code: \(response.statusCode)")
-                                
-                                if response.statusCode == 404 {
-                                    print("this is not valid github account")
-                                    isNotValidGitHubAccount = true
-                                }
-                                if response.statusCode == 200 {
-                                    print("this is valid github account")
-                                    //                                getRepos(githubUserName)
-                                    //                                print(runShFile("getUserData.sh \(githubUserName)"))
-                                    withAnimation{
-                                        askUserInformation = true
-                                    }
-                                }
+//                            let url = URL(string: "https://github.com/\(githubUserName)")!
+//
+//                            let task = URLSession.shared.dataTask(with: url) { data, response, error in
+//                                guard let response = response as? HTTPURLResponse else {
+//                                    print("No response or response is not an HTTPURLResponse")
+//                                    return
+//                                }
+//
+//                                print("HTTP response status code: \(response.statusCode)")
+//
+//                                if response.statusCode == 404 {
+//                                    print("this is not valid github account")
+//                                    isNotValidGitHubAccount = true
+//                                }
+//                                if response.statusCode == 200 {
+//                                    print("this is valid github account")
+//                                    //                                getRepos(githubUserName)
+//                                    //                                print(runShFile("getUserData.sh \(githubUserName)"))
+//                                    withAnimation{
+//                                        askUserInformation = true
+//                                    }
+//                                }
+//                            }
+//
+//                            task.resume()
+                            withAnimation {
+                                showLoading = true
+                                askGithubUserName = false
                             }
-                            
-                            task.resume()
                         }
                     }
-                Button(action: {
-                    if githubUserName.isEmpty {
-                        print("Not Github User")
-                    } else {
+                if !githubUserName.isEmpty{
+                    Rectangle()
+                        .frame(width: 0, height: 0)
+                        .onAppear {
+                            withAnimation {
+                                githubUserNameIsNotEmpty = true
+                            }
+                        }
+                } else if githubUserName.isEmpty {
+                    Rectangle()
+                        .frame(width: 0, height: 0)
+                        .onAppear {
+                            withAnimation {
+                                githubUserNameIsNotEmpty = false
+                            }
+                        }
+                }
+                if githubUserNameIsNotEmpty {
+                    Button(action: {
+                        withAnimation {
+                            showLoading = true
+                            askGithubUserName = false
+                        }
+                    }, label: {
+                        HStack{
+                            Text("Continue")
+                                .fontWeight(.semibold)
+                                .font(.title3)
+                            Image(systemName: "arrow.right")
+                        }
+                        .zIndex(1)
+                    })
+                    .buttonStyle(.borderless)
+                }
+            } else if showLoading {
+                ProgressView()
+                    .onAppear{
                         let url = URL(string: "https://github.com/\(githubUserName)")!
                         
                         let task = URLSession.shared.dataTask(with: url) { data, response, error in
@@ -98,6 +137,8 @@ struct OnboardingView: View {
                             if response.statusCode == 404 {
                                 print("this is not valid github account")
                                 isNotValidGitHubAccount = true
+                                askGithubUserName = true
+                                showLoading = false
                             }
                             if response.statusCode == 200 {
                                 print("this is valid github account")
@@ -105,49 +146,51 @@ struct OnboardingView: View {
                                 //                                print(runShFile("getUserData.sh \(githubUserName)"))
                                 withAnimation{
                                     askUserInformation = true
+                                    showLoading = false
                                 }
                             }
                         }
                         
                         task.resume()
                     }
-                }, label: {
-                    HStack{
-                        Text("Continue")
-                            .fontWeight(.semibold)
-                            .font(.title3)
-                        Image(systemName: "arrow.right")
-                    }
-                    .zIndex(1)
-                })
-                .buttonStyle(.borderless)
             }
             if askUserInformation {
-                HStack{
-                    ZStack{
-                        AsyncImage(url: URL(string: "https://avatars.githubusercontent.com/\(githubUserName)")) { image in
-                            image
-                                .image?.resizable()
-                        }
-                        .onAppear {
-                            withAnimation{
-                                askGithubUserName = false
+                VStack{
+                    Text("Is this you?")
+                        .fontWeight(.bold)
+                        .font(.largeTitle)
+                    HStack{
+                        ZStack{
+                            AsyncImage(url: URL(string: "https://avatars.githubusercontent.com/\(githubUserName)")) { image in
+                                image
+                                    .image?.resizable()
                             }
+                            .onAppear {
+                                withAnimation{
+                                    askGithubUserName = false
+                                }
+                            }
+                            .zIndex(1)
+                            ProgressView()
+                                .zIndex(0)
                         }
-                        .zIndex(1)
-                        ProgressView()
-                            .zIndex(0)
+                        .frame(width: 100, height: 100)
+                        .cornerRadius(20)
+                        .padding(.trailing)
+                        //                    API Call URL: https://api.github.com/users/\(githubUserName)
+                        VStack(alignment: .leading){
+                            Text(getUserData()[0])
+                                .fontWeight(.bold)
+                                .font(.title)
+                            Text(getUserData()[1])
+                                .fontWeight(.bold)
+                                .font(.title2)
+                                .foregroundColor(.secondary)
+                            Text(getUserData()[2])
+                                .fontWeight(.bold)
+                                .foregroundColor(.secondary)
+                        }
                     }
-                    //            placeholder: {
-                    //                    VStack{
-                    //                        Text("Loading Your Avatar")
-                    //                        ProgressView()
-                    //                    }
-                    //                }
-                    .frame(width: 150, height: 150)
-                    .cornerRadius(20)
-                    //                    API Call URL: https://api.github.com/users/\(githubUserName)
-                    
                 }
             }
         }
@@ -185,15 +228,23 @@ struct OnboardingView: View {
         }
     }
     func getUserData() -> [String] {
-        let url = "https://api.github.com/users/\(githubUserName)"
-        let html = executeSh("curl https://api.github.com/users/\(githubUserName)")
+        let html = executeSh("curl https://api.github.com/users/\(githubUserName) -s")
+        print(html)
+        var valueToReturn = [String]()
         let decoder = JSONDecoder()
         do{
             let data = try decoder.decode(UserData.self, from: html.data(using: .utf8)!)
-            return []
+            var gname = data.name ?? ""
+            var glogin = data.login
+            if gname.isEmpty {
+                gname = glogin
+                glogin = ""
+            }
+            valueToReturn = [gname, glogin, data.bio ?? ""]
         }
-        catch {
-            print("I got error")
+        catch let error as NSError{
+            print(error)
         }
+        return valueToReturn
     }
 }
