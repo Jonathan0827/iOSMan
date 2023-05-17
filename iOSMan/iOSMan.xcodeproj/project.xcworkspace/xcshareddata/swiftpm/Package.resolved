@@ -1,21 +1,21 @@
 {
   "pins" : [
     {
-      "identity" : "octokit.swift",
+      "identity" : "filepicker",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/nerdishbynature/octokit.swift.git",
+      "location" : "https://github.com/markrenaud/FilePicker.git",
       "state" : {
-        "revision" : "f762f1566f7cd0e683b9329f169c28ab6ef993cc",
-        "version" : "0.12.0"
+        "revision" : "720f8cb5ca0c0efc982ed381afc84ba3e8b3214e",
+        "version" : "1.0.1"
       }
     },
     {
-      "identity" : "requestkit",
+      "identity" : "yams",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/nerdishbynature/RequestKit.git",
+      "location" : "https://github.com/jpsim/Yams.git",
       "state" : {
-        "revision" : "8b0258ea2a4345cbcac90509b764faacea12efb0",
-        "version" : "3.2.1"
+        "revision" : "f47ba4838c30dbd59998a4e4c87ab620ff959e8a",
+        "version" : "5.0.5"
       }
     }
   ],

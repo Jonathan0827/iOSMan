@@ -7,7 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		912948D82A14CD4E002CAEA4 /* Yams in Frameworks */ = {isa = PBXBuildFile; productRef = 912948D72A14CD4E002CAEA4 /* Yams */; };
 		914E50502A07DF3800F16BB0 /* userStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914E504F2A07DF3800F16BB0 /* userStruct.swift */; };
+		9179FB9D2A0B88D300A01D96 /* FilePicker in Frameworks */ = {isa = PBXBuildFile; productRef = 9179FB9C2A0B88D300A01D96 /* FilePicker */; };
+		918CD3252A0925F200BF730F /* GrowingBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918CD3242A0925F200BF730F /* GrowingBtn.swift */; };
+		918CD3312A0A6BE100BF730F /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918CD3302A0A6BE100BF730F /* MainView.swift */; };
+		918CD3332A0A6F6E00BF730F /* ProjSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918CD3322A0A6F6E00BF730F /* ProjSelectionView.swift */; };
 		91AC82722A0783610088E802 /* iOSManApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AC82712A0783610088E802 /* iOSManApp.swift */; };
 		91AC82742A0783610088E802 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AC82732A0783610088E802 /* ContentView.swift */; };
 		91AC82762A0783620088E802 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 91AC82752A0783620088E802 /* Assets.xcassets */; };
@@ -17,9 +22,7 @@
 		91AC82902A0783630088E802 /* iOSManUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AC828F2A0783630088E802 /* iOSManUITestsLaunchTests.swift */; };
 		91AC829E2A0784B60088E802 /* I_Run_Shell_Script.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AC829D2A0784B60088E802 /* I_Run_Shell_Script.swift */; };
 		91AC82A12A07870C0088E802 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AC82A02A07870C0088E802 /* OnboardingView.swift */; };
-		91AC82A82A07920C0088E802 /* OctoKit in Frameworks */ = {isa = PBXBuildFile; productRef = 91AC82A72A07920C0088E802 /* OctoKit */; };
 		91AC82AA2A0792250088E802 /* GetRepos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AC82A92A0792250088E802 /* GetRepos.swift */; };
-		91AC82AC2A0795750088E802 /* getRepoList.sh in Resources */ = {isa = PBXBuildFile; fileRef = 91AC82AB2A07956A0088E802 /* getRepoList.sh */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +44,9 @@
 
 /* Begin PBXFileReference section */
 		914E504F2A07DF3800F16BB0 /* userStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userStruct.swift; sourceTree = "<group>"; };
+		918CD3242A0925F200BF730F /* GrowingBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrowingBtn.swift; sourceTree = "<group>"; };
+		918CD3302A0A6BE100BF730F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		918CD3322A0A6F6E00BF730F /* ProjSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjSelectionView.swift; sourceTree = "<group>"; };
 		91AC826E2A0783610088E802 /* iOSMan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSMan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		91AC82712A0783610088E802 /* iOSManApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSManApp.swift; sourceTree = "<group>"; };
 		91AC82732A0783610088E802 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -52,12 +58,9 @@
 		91AC82892A0783630088E802 /* iOSManUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSManUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		91AC828D2A0783630088E802 /* iOSManUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSManUITests.swift; sourceTree = "<group>"; };
 		91AC828F2A0783630088E802 /* iOSManUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSManUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		91AC829C2A0783760088E802 /* update.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = update.sh; sourceTree = "<group>"; };
 		91AC829D2A0784B60088E802 /* I_Run_Shell_Script.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = I_Run_Shell_Script.swift; sourceTree = "<group>"; };
-		91AC829F2A0785780088E802 /* make_git_repo.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = make_git_repo.sh; sourceTree = "<group>"; };
 		91AC82A02A07870C0088E802 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		91AC82A92A0792250088E802 /* GetRepos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRepos.swift; sourceTree = "<group>"; };
-		91AC82AB2A07956A0088E802 /* getRepoList.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = getRepoList.sh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,7 +68,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				91AC82A82A07920C0088E802 /* OctoKit in Frameworks */,
+				912948D82A14CD4E002CAEA4 /* Yams in Frameworks */,
+				9179FB9D2A0B88D300A01D96 /* FilePicker in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,15 +113,15 @@
 		91AC82702A0783610088E802 /* iOSMan */ = {
 			isa = PBXGroup;
 			children = (
+				918CD3322A0A6F6E00BF730F /* ProjSelectionView.swift */,
+				918CD3302A0A6BE100BF730F /* MainView.swift */,
 				914E504F2A07DF3800F16BB0 /* userStruct.swift */,
 				91AC82712A0783610088E802 /* iOSManApp.swift */,
 				91AC82732A0783610088E802 /* ContentView.swift */,
 				91AC82A02A07870C0088E802 /* OnboardingView.swift */,
+				918CD3242A0925F200BF730F /* GrowingBtn.swift */,
 				91AC82A92A0792250088E802 /* GetRepos.swift */,
 				91AC829D2A0784B60088E802 /* I_Run_Shell_Script.swift */,
-				91AC82AB2A07956A0088E802 /* getRepoList.sh */,
-				91AC829C2A0783760088E802 /* update.sh */,
-				91AC829F2A0785780088E802 /* make_git_repo.sh */,
 				91AC82752A0783620088E802 /* Assets.xcassets */,
 				91AC827A2A0783620088E802 /* iOSMan.entitlements */,
 				91AC82772A0783620088E802 /* Preview Content */,
@@ -167,7 +171,8 @@
 			);
 			name = iOSMan;
 			packageProductDependencies = (
-				91AC82A72A07920C0088E802 /* OctoKit */,
+				9179FB9C2A0B88D300A01D96 /* FilePicker */,
+				912948D72A14CD4E002CAEA4 /* Yams */,
 			);
 			productName = iOSMan;
 			productReference = 91AC826E2A0783610088E802 /* iOSMan.app */;
@@ -242,7 +247,8 @@
 			);
 			mainGroup = 91AC82652A0783610088E802;
 			packageReferences = (
-				91AC82A62A07920C0088E802 /* XCRemoteSwiftPackageReference "octokit.swift" */,
+				9179FB9B2A0B88D300A01D96 /* XCRemoteSwiftPackageReference "FilePicker" */,
+				912948D62A14CD4E002CAEA4 /* XCRemoteSwiftPackageReference "Yams" */,
 			);
 			productRefGroup = 91AC826F2A0783610088E802 /* Products */;
 			projectDirPath = "";
@@ -261,7 +267,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				91AC82792A0783620088E802 /* Preview Assets.xcassets in Resources */,
-				91AC82AC2A0795750088E802 /* getRepoList.sh in Resources */,
 				91AC82762A0783620088E802 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -287,8 +292,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				918CD3252A0925F200BF730F /* GrowingBtn.swift in Sources */,
+				918CD3312A0A6BE100BF730F /* MainView.swift in Sources */,
 				91AC82742A0783610088E802 /* ContentView.swift in Sources */,
 				91AC82AA2A0792250088E802 /* GetRepos.swift in Sources */,
+				918CD3332A0A6F6E00BF730F /* ProjSelectionView.swift in Sources */,
 				91AC82A12A07870C0088E802 /* OnboardingView.swift in Sources */,
 				91AC82722A0783610088E802 /* iOSManApp.swift in Sources */,
 				91AC829E2A0784B60088E802 /* I_Run_Shell_Script.swift in Sources */,
@@ -610,21 +618,34 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		91AC82A62A07920C0088E802 /* XCRemoteSwiftPackageReference "octokit.swift" */ = {
+		912948D62A14CD4E002CAEA4 /* XCRemoteSwiftPackageReference "Yams" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/nerdishbynature/octokit.swift.git";
+			repositoryURL = "https://github.com/jpsim/Yams.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.12.0;
+				minimumVersion = 5.0.0;
+			};
+		};
+		9179FB9B2A0B88D300A01D96 /* XCRemoteSwiftPackageReference "FilePicker" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/markrenaud/FilePicker.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		91AC82A72A07920C0088E802 /* OctoKit */ = {
+		912948D72A14CD4E002CAEA4 /* Yams */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 91AC82A62A07920C0088E802 /* XCRemoteSwiftPackageReference "octokit.swift" */;
-			productName = OctoKit;
+			package = 912948D62A14CD4E002CAEA4 /* XCRemoteSwiftPackageReference "Yams" */;
+			productName = Yams;
+		};
+		9179FB9C2A0B88D300A01D96 /* FilePicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9179FB9B2A0B88D300A01D96 /* XCRemoteSwiftPackageReference "FilePicker" */;
+			productName = FilePicker;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -10,18 +10,21 @@ import Foundation
 func executeSh(_ command: String) -> String {
     let task = Process()
     let pipe = Pipe()
-    
     task.standardOutput = pipe
     task.standardError = pipe
     task.arguments = ["-c", command]
-    task.launchPath = "/bin/zsh"
+    task.launchPath = "/bin/sh"
     task.standardInput = nil
     task.launch()
-    
     let data = pipe.fileHandleForReading.readDataToEndOfFile()
     let output = String(data: data, encoding: .utf8)!
-    
-    return output
+    var returnValue = ""
+    if output.isEmpty {
+        returnValue = "macOS returned nothing"
+    } else {
+        returnValue = output
+    }
+    return returnValue
 }
 func update() {
     executeSh("sh ~/iOSManHelpers/update.sh")
@@ -33,7 +36,7 @@ func runShFile(_ shName: String) -> String {
     task.standardOutput = pipe
     task.standardError = pipe
     task.arguments = ["-c", "sh ~/iOSManHelpers/\(shName)"]
-    task.launchPath = "/bin/zsh"
+    task.launchPath = "/bin/sh"
     task.standardInput = nil
     task.launch()
     
