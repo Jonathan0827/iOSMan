@@ -3,8 +3,5 @@
 ## Requirements (Currently)
 - Git
 - curl
-## Requirements (Expected)
-- Git
-- Xcode
-- GitHub CLI
-- curl
+- Brew
+- GitHub CLI, JQ (Required, but can be installed on the app)
