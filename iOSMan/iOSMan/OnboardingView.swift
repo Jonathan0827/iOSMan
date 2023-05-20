@@ -24,9 +24,12 @@ struct OnboardingView: View {
     @State var endSetup: Bool = false
     @State var ghShortInst: String = "Before we start, let's install GitHub CLI"
     @AppStorage("isFirstLaunching") var isFirstLaunching = true
+    @AppStorage("brewPath") var brewPath = ""
     @State var showLoading: Bool = false
     @State var showLoadingGh: Bool = false
     @AppStorage("githubUserName") var githubUserName = ""
+    @AppStorage("githubUserAvatar") var githubUserAvatar = ""
+
     @AppStorage("userName") var userName = ""
     var body: some View {
         VStack{
@@ -36,6 +39,14 @@ struct OnboardingView: View {
                         .fontWeight(.bold)
                         .font(.largeTitle)
                         .onAppear {
+                                      
+//                            DispatchQueue.main.asyncAfter(deadline: .now()+0.3, execute: {
+//
+//                                executeSh("osascript -e 'tell application \"Terminal\" '")
+//                            })
+                            githubUserName = executeSh("\(brewPath)gh api user | \(brewPath)jq -r '.login'")
+                            githubUserName.replace("\n", with: "")
+                            githubUserAvatar = "https://avatars.githubusercontent.com/\(githubUserName)"
                             DispatchQueue.main.asyncAfter(deadline: .now()+1.0, execute: {
                                 withAnimation { welcomeLoaded = true;githubUserName = "" }
                             })
@@ -48,22 +59,19 @@ struct OnboardingView: View {
                                     shortDesc = false
                                 }
                             })
-                            if executeSh("gh").contains("command not found") {
-                                if CPUType() == "ARM" {
-                                    if !executeSh("/opt/homebrew/bin/gh").contains("command not found") {
-                                        DispatchQueue.main.asyncAfter(deadline: .now()+4.0, execute: {
-                                            withAnimation {
-                                                installGh = true
-                                            }
-                                        })
-                                    } else {
-                                        DispatchQueue.main.asyncAfter(deadline: .now()+4.0, execute: {
-                                            withAnimation { askUserInformation = true }
-                                        })
-                                    }
+                            if CPUType() == "ARM" {
+                                brewPath = "/opt/homebrew/bin/"
                             }
+
+                                if executeSh("\(brewPath)gh").contains("command not found") || executeSh("\(brewPath)gh").contains("such file") {
+                                    DispatchQueue.main.asyncAfter(deadline: .now()+4.0, execute: {
+                                        withAnimation {
+                                            installGh = true
+                                        }
+                                    })
+                                }
                                 
-                            } else {
+                            else {
                                 DispatchQueue.main.asyncAfter(deadline: .now()+4.0, execute: {
                                     withAnimation { askUserInformation = true }
                                 })
@@ -91,46 +99,25 @@ struct OnboardingView: View {
                                         showLoadingGh = true
                                     }
                                     ghInstallLog.append("Checking brew\n")
-                                    print(executeSh("brew"))
-                                    if executeSh("brew").contains("command not found") {
-                                        if CPUType() == "ARM" {
-                                            if executeSh("/opt/homebrew/bin/brew").contains("command not found") {
-                                                ghInstallLog.append("CPU Type: ARM\nbrew not found\n")
-                                                withAnimation { showNoBrewInstalled = true }
-                                            } else {
-                                                ghInstallLog.append("CPU Type: ARM\nbrew found\n")
-                                                ghShortInst = "Installing GitHub CLI. Please wait"
-                                                DispatchQueue.main.asyncAfter(deadline: .now()+0.5, execute: {
-                                                    ghInstallLog.append(executeSh("/opt/homebrew/bin/brew install gh"))
-                                                    ghInstallLog.append("✅ GitHub CLI Installed!\n")
-                                                    ghInstallLog.append("Configuring GitHub CLI")
-                                                    DispatchQueue.main.asyncAfter(deadline: .now()+0.3, execute: {
-                                                        executeSh("osascript -e 'tell app \"Terminal\" to do script \"gh auth login -p https -w\"'")
-                                                        executeSh("osascript -e 'tell application \"Terminal\" to set selected of tab 1 of front window to true'")
-                                                    })
-                                                })
-                                                
-                                            }
-                                        } else {
-                                            ghInstallLog.append("CPU Type: X86\nbrew not found\n")
-                                            withAnimation { showNoBrewInstalled = true }
-                                        }
-                                        
-                                        
-                                        
+                                    if executeSh("\(brewPath)brew").contains("command not found") || executeSh("\(brewPath)brew").contains("such file")  {
+                                        ghInstallLog.append("CPU Type: \(CPUType())\nbrew not found\n")
+                                        withAnimation { showNoBrewInstalled = true }
                                     } else {
-                                        //                                    ghInstallLog += (executeSh("brew install gh"))
                                         ghInstallLog.append("CPU Type: \(CPUType())\nbrew found\n")
                                         ghShortInst = "Installing GitHub CLI. Please wait"
                                         DispatchQueue.main.asyncAfter(deadline: .now()+0.5, execute: {
-                                            ghInstallLog.append(executeSh("brew install gh"))
+                                            ghInstallLog.append(executeSh("\(brewPath)brew install gh"))
                                             ghInstallLog.append("✅ GitHub CLI Installed!")
+                                            if executeSh("\(brewPath)jq").contains("command not found") || executeSh("\(brewPath)jq").contains("such file") {
+                                                ghInstallLog.append("Installing jq\n")
+                                                DispatchQueue.main.asyncAfter(deadline: .now()+0.3, execute: {
+                                                    ghInstallLog.append(executeSh("\(brewPath)brew install jq\n"))
+                                                })
+                                                ghInstallLog.append("✅ jq Installed!\n")
+                                            }
                                             ghInstallLog.append("Configuring GitHub CLI")
+                                            print(runShFile("setupGh.sh"))
 
-                                            DispatchQueue.main.asyncAfter(deadline: .now()+0.3, execute: {
-                                                executeSh("osascript -e 'tell app \"Terminal\" to do script \"gh auth login -p https -w\"'")
-                                                executeSh("osascript -e 'tell application \"Terminal\" to set selected of tab 1 of front window to true'")
-                                            })
                                         })
                                     }
                                 }, label: {
@@ -194,6 +181,9 @@ struct OnboardingView: View {
                 Text("Please enter your GitHub user name")
                     .fontWeight(.bold)
                     .font(.largeTitle)
+                    .onAppear {
+                        githubUserName = ""
+                    }
                 TextField("Enter your GitHub user name here", text: $githubUserName)
                     .frame(width: 300)
                     .textFieldStyle(.roundedBorder)
@@ -278,9 +268,13 @@ struct OnboardingView: View {
                     Text("Is this you?")
                         .fontWeight(.bold)
                         .font(.largeTitle)
+                        .onAppear {
+//                            githubUserName = executeSh("\(brewPath)gh api user | \(brewPath)jq -r '.login'")
+                            print(githubUserAvatar)
+                        }
                     HStack{
                         ZStack{
-                            AsyncImage(url: URL(string: "https://avatars.githubusercontent.com/\(githubUserName)")) { image in
+                            AsyncImage(url: URL(string: githubUserAvatar)) { image in
                                 image
                                     .image?.resizable()
                             }
@@ -296,18 +290,18 @@ struct OnboardingView: View {
                         .frame(width: 100, height: 100)
                         .cornerRadius(20)
                         .padding(.trailing)
-//                        VStack(alignment: .leading){
-//                            Text(getUserData()[0])
-//                                .fontWeight(.bold)
-//                                .font(.title)
-//                            Text(getUserData()[1])
-//                                .fontWeight(.bold)
-//                                .font(.title2)
-//                                .foregroundColor(.secondary)
-//                            Text(getUserData()[2])
-//                                .fontWeight(.bold)
-//                                .foregroundColor(.secondary)
-//                        }
+                        VStack(alignment: .leading){
+                            Text(getUserData()[0])
+                                .fontWeight(.bold)
+                                .font(.title)
+                            Text(getUserData()[1])
+                                .fontWeight(.bold)
+                                .font(.title2)
+                                .foregroundColor(.secondary)
+                            Text(getUserData()[2])
+                                .fontWeight(.bold)
+                                .foregroundColor(.secondary)
+                        }
                     }
                     HStack{
                         Button(action: {
@@ -401,7 +395,12 @@ struct OnboardingView: View {
         }
     }
     func getUserData() -> [String] {
-        let html = executeSh("curl https://api.github.com/users/\(githubUserName) -s")
+        let html = executeSh("""
+\(brewPath)gh api \
+  -H "Accept: application/vnd.github+json" \
+  -H "X-GitHub-Api-Version: 2022-11-28" \
+  /user
+""")
         var valueToReturn = [String]()
         let decoder = JSONDecoder()
         do{
