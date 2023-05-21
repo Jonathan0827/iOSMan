@@ -1,9 +1,6 @@
 #!/bin/bash
 set -e
 ./build.sh
-git add ./build/iOSMan.app
-git add ./build/iOSMan.pkg
-git commit -m "rebuild"
 git push
 gh release create v"$1" "./build/iOSMan.pkg#" -t "$2" -n "$3" --latest
 git push
