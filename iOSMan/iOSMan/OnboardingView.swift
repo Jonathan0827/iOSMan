@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import Yams
+
 struct OnboardingView: View {
     @State var viewLoaded: Bool = false
     @State var installGh: Bool = false

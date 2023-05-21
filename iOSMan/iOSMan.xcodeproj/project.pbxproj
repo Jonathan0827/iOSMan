@@ -7,9 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		912948D82A14CD4E002CAEA4 /* Yams in Frameworks */ = {isa = PBXBuildFile; productRef = 912948D72A14CD4E002CAEA4 /* Yams */; };
 		914E50502A07DF3800F16BB0 /* userStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914E504F2A07DF3800F16BB0 /* userStruct.swift */; };
-		9179FB9D2A0B88D300A01D96 /* FilePicker in Frameworks */ = {isa = PBXBuildFile; productRef = 9179FB9C2A0B88D300A01D96 /* FilePicker */; };
 		918CD3252A0925F200BF730F /* GrowingBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918CD3242A0925F200BF730F /* GrowingBtn.swift */; };
 		918CD3312A0A6BE100BF730F /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918CD3302A0A6BE100BF730F /* MainView.swift */; };
 		918CD3332A0A6F6E00BF730F /* ProjSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918CD3322A0A6F6E00BF730F /* ProjSelectionView.swift */; };
@@ -68,8 +66,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				912948D82A14CD4E002CAEA4 /* Yams in Frameworks */,
-				9179FB9D2A0B88D300A01D96 /* FilePicker in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,8 +167,6 @@
 			);
 			name = iOSMan;
 			packageProductDependencies = (
-				9179FB9C2A0B88D300A01D96 /* FilePicker */,
-				912948D72A14CD4E002CAEA4 /* Yams */,
 			);
 			productName = iOSMan;
 			productReference = 91AC826E2A0783610088E802 /* iOSMan.app */;
@@ -247,8 +241,6 @@
 			);
 			mainGroup = 91AC82652A0783610088E802;
 			packageReferences = (
-				9179FB9B2A0B88D300A01D96 /* XCRemoteSwiftPackageReference "FilePicker" */,
-				912948D62A14CD4E002CAEA4 /* XCRemoteSwiftPackageReference "Yams" */,
 			);
 			productRefGroup = 91AC826F2A0783610088E802 /* Products */;
 			projectDirPath = "";
@@ -616,38 +608,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		912948D62A14CD4E002CAEA4 /* XCRemoteSwiftPackageReference "Yams" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/jpsim/Yams.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
-			};
-		};
-		9179FB9B2A0B88D300A01D96 /* XCRemoteSwiftPackageReference "FilePicker" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/markrenaud/FilePicker.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		912948D72A14CD4E002CAEA4 /* Yams */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 912948D62A14CD4E002CAEA4 /* XCRemoteSwiftPackageReference "Yams" */;
-			productName = Yams;
-		};
-		9179FB9C2A0B88D300A01D96 /* FilePicker */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9179FB9B2A0B88D300A01D96 /* XCRemoteSwiftPackageReference "FilePicker" */;
-			productName = FilePicker;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 91AC82662A0783610088E802 /* Project object */;
 }
