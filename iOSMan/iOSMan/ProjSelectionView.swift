@@ -9,15 +9,29 @@ import SwiftUI
 
 struct ProjSelectionView: View {
     let projectName: String
-    let projectType: Int
+    let projectType: Bool
     let projectPath: URL
     let projectFilePath: URL
     var body: some View {
-        VStack {
-            Text(projectName)
-                .fontWeight(.semibold)
-                .font(.title2)
+        NavigationLink(destination: Text("hi"), label: {
             
-        }
+            VStack(alignment: .leading) {
+                Text(projectName)
+                    .fontWeight(.bold)
+                    .font(.largeTitle)
+                if projectType {
+                    Text("Xcode Project")
+                        .foregroundColor(.secondary)
+                        .fontWeight(.semibold)
+                        .font(.title3)
+                } else {
+                    Text("Xcode Workspace")
+                        .foregroundColor(.secondary)
+                        .fontWeight(.semibold)
+                        .font(.title3)
+                }
+            }
+            .padding(5)
+        })
     }
 }

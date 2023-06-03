@@ -9,15 +9,20 @@ import SwiftUI
 
 struct MainView: View {
     @AppStorage("isFirstLaunching") var isFirstLaunching = true
+    @State var managedProjects = ["test"]
+    @State var selectKeeper = Set<String>()
+
     @State var selectedProj: String = ""
     let hour = Calendar.current.component(.hour, from: Date())
     var body: some View {
         NavigationSplitView{
             
 //            ProjSelectionView(projectName: "Test Xcodeproj", projectType: 2, projectPath: URL(string: "file://users/jonathanlim/desktop/coding/wonsinheungmid/")!, projectFilePath: URL(string: "file://users/jonathanlim/desktop/coding/wonsinheungmid/wonsinheungmid/wonsinheungmid.xcworkspace")!)
-            NavigationLink(destination: Text("hi"), label: {
-                Text("hi")
-            })
+            List(managedProjects, id: \.self, selection: $selectKeeper){ name in
+                ProjSelectionView(projectName: "WonsinheungMid", projectType: false, projectPath: URL(string: "file://Users/jonathanlim/desktop/coding/WonsinheungMid")!, projectFilePath: URL(string: "file://Users/jonathanlim/desktop/coding/WonsinheungMid/WonsinheungMid/WonsinheungMid.xcworkspace")!)
+                
+            }
+            
             .navigationSplitViewColumnWidth(300)
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
