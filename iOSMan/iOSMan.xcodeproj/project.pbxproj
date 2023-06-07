@@ -10,7 +10,7 @@
 		914E50502A07DF3800F16BB0 /* userStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914E504F2A07DF3800F16BB0 /* userStruct.swift */; };
 		918CD3252A0925F200BF730F /* GrowingBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918CD3242A0925F200BF730F /* GrowingBtn.swift */; };
 		918CD3312A0A6BE100BF730F /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918CD3302A0A6BE100BF730F /* MainView.swift */; };
-		918CD3332A0A6F6E00BF730F /* ProjSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918CD3322A0A6F6E00BF730F /* ProjSelectionView.swift */; };
+		918CD3332A0A6F6E00BF730F /* ProjectViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918CD3322A0A6F6E00BF730F /* ProjectViews.swift */; };
 		91AC82722A0783610088E802 /* iOSManApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AC82712A0783610088E802 /* iOSManApp.swift */; };
 		91AC82742A0783610088E802 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AC82732A0783610088E802 /* ContentView.swift */; };
 		91AC82762A0783620088E802 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 91AC82752A0783620088E802 /* Assets.xcassets */; };
@@ -20,7 +20,7 @@
 		91AC82902A0783630088E802 /* iOSManUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AC828F2A0783630088E802 /* iOSManUITestsLaunchTests.swift */; };
 		91AC829E2A0784B60088E802 /* I_Run_Shell_Script.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AC829D2A0784B60088E802 /* I_Run_Shell_Script.swift */; };
 		91AC82A12A07870C0088E802 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AC82A02A07870C0088E802 /* OnboardingView.swift */; };
-		91AC82AA2A0792250088E802 /* GetRepos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AC82A92A0792250088E802 /* GetRepos.swift */; };
+		91F631592A307F12002863EC /* GlobalStructAndFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F631582A307F12002863EC /* GlobalStructAndFunctions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,7 +44,7 @@
 		914E504F2A07DF3800F16BB0 /* userStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userStruct.swift; sourceTree = "<group>"; };
 		918CD3242A0925F200BF730F /* GrowingBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrowingBtn.swift; sourceTree = "<group>"; };
 		918CD3302A0A6BE100BF730F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
-		918CD3322A0A6F6E00BF730F /* ProjSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjSelectionView.swift; sourceTree = "<group>"; };
+		918CD3322A0A6F6E00BF730F /* ProjectViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectViews.swift; sourceTree = "<group>"; };
 		91AC826E2A0783610088E802 /* iOSMan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSMan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		91AC82712A0783610088E802 /* iOSManApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSManApp.swift; sourceTree = "<group>"; };
 		91AC82732A0783610088E802 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -58,7 +58,7 @@
 		91AC828F2A0783630088E802 /* iOSManUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSManUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		91AC829D2A0784B60088E802 /* I_Run_Shell_Script.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = I_Run_Shell_Script.swift; sourceTree = "<group>"; };
 		91AC82A02A07870C0088E802 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
-		91AC82A92A0792250088E802 /* GetRepos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRepos.swift; sourceTree = "<group>"; };
+		91F631582A307F12002863EC /* GlobalStructAndFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalStructAndFunctions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,14 +109,14 @@
 		91AC82702A0783610088E802 /* iOSMan */ = {
 			isa = PBXGroup;
 			children = (
-				918CD3322A0A6F6E00BF730F /* ProjSelectionView.swift */,
+				918CD3322A0A6F6E00BF730F /* ProjectViews.swift */,
+				91F631582A307F12002863EC /* GlobalStructAndFunctions.swift */,
 				918CD3302A0A6BE100BF730F /* MainView.swift */,
 				914E504F2A07DF3800F16BB0 /* userStruct.swift */,
 				91AC82712A0783610088E802 /* iOSManApp.swift */,
 				91AC82732A0783610088E802 /* ContentView.swift */,
 				91AC82A02A07870C0088E802 /* OnboardingView.swift */,
 				918CD3242A0925F200BF730F /* GrowingBtn.swift */,
-				91AC82A92A0792250088E802 /* GetRepos.swift */,
 				91AC829D2A0784B60088E802 /* I_Run_Shell_Script.swift */,
 				91AC82752A0783620088E802 /* Assets.xcassets */,
 				91AC827A2A0783620088E802 /* iOSMan.entitlements */,
@@ -287,10 +287,10 @@
 				918CD3252A0925F200BF730F /* GrowingBtn.swift in Sources */,
 				918CD3312A0A6BE100BF730F /* MainView.swift in Sources */,
 				91AC82742A0783610088E802 /* ContentView.swift in Sources */,
-				91AC82AA2A0792250088E802 /* GetRepos.swift in Sources */,
-				918CD3332A0A6F6E00BF730F /* ProjSelectionView.swift in Sources */,
+				918CD3332A0A6F6E00BF730F /* ProjectViews.swift in Sources */,
 				91AC82A12A07870C0088E802 /* OnboardingView.swift in Sources */,
 				91AC82722A0783610088E802 /* iOSManApp.swift in Sources */,
+				91F631592A307F12002863EC /* GlobalStructAndFunctions.swift in Sources */,
 				91AC829E2A0784B60088E802 /* I_Run_Shell_Script.swift in Sources */,
 				914E50502A07DF3800F16BB0 /* userStruct.swift in Sources */,
 			);
