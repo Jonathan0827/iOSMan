@@ -46,7 +46,7 @@ func executeBash(_ command: String) -> String {
     return returnValue
 }
 func update() {
-    executeSh("sh ~/iOSManHelpers/update.sh")
+    print(executeSh("sh ~/iOSManHelpers/update.sh"))
 }
 func runShFile(_ shName: String) -> String {
     let task = Process()

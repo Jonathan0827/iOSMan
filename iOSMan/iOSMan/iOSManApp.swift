@@ -12,6 +12,8 @@ struct iOSManApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+//                .frame(minWidth: 700, minHeight: 350)
         }
+//        .windowResizability(.contentSize)
     }
 }

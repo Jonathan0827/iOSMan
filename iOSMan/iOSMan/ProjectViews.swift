@@ -44,24 +44,46 @@ struct ProjSelectedView: View {
     @State var smallFont = false
     @State var showTitle: Bool = false
     @State var showFT: Bool = false
+    @State var showOpt: Bool = false
     @State var fontSize = 100.0
+    
     var body: some View {
         VStack{
             if showTitle{
-                Text(projectName)
-                    .fontWeight(.bold)
-                    .font(.system(size: fontSize))
-                if showFT{
-                    if projectType == true {
-                        Text("Xcode Project File")
-                            .font(.title)
-                            .fontWeight(.semibold)
-                            .foregroundStyle(.secondary)
-                    } else {
-                        Text("Xcode Workspace File")
-                            .font(.title)
-                            .fontWeight(.semibold)
-                            .foregroundStyle(.secondary)
+                GeometryReader { g in
+                    Text(projectName)
+                        .fontWeight(.bold)
+                        .font(.system(size: g.size.height/10))
+                        .position(x: g.size.width / 2, y: g.size.height / 2)
+                    if showFT{
+                        if projectType == true {
+                            Text("Xcode Project File")
+                                .font(.system(size: g.size.height/30))
+                                .fontWeight(.semibold)
+                                .foregroundStyle(.secondary)
+                                .position(x: g.size.width / 2, y: g.size.height / 1.73)
+                            
+                        } else {
+                            Text("Xcode Workspace File")
+                                .font(.system(size: g.size.height/30))
+                                .fontWeight(.semibold)
+                                .foregroundStyle(.secondary)
+                                .position(x: g.size.width / 2, y: g.size.height / 1.73)
+                            
+                        }
+                    }
+                }
+            }
+            if showOpt {
+                ZStack{
+//                    Spacer()
+                    Rectangle()
+                        .fill(.opacity(0.1))
+                        .blur(radius: 150)
+                    VStack {
+                        Text("Options here")
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
                     }
                 }
             }
@@ -79,8 +101,7 @@ struct ProjSelectedView: View {
             })
             DispatchQueue.main.asyncAfter(deadline: .now()+2.9, execute: {
                 withAnimation{
-                    showTitle = false
-                    showFT = false
+                    showOpt = true
                 }
             })
         }
