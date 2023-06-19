@@ -51,7 +51,7 @@ struct MainView: View {
         var timeDesc = ""
         if hour >= 5 && hour < 12 {
             timeDesc = "Good Morning! 🌄"
-        } else if hour >= 12 && hour < 17 {
+        } else if hour >= 12 && hour < 17 { 
             timeDesc = "Good Afternoon! 🌇"
         } else if hour >= 17 && hour < 19{
             timeDesc = "Good Evening! 🌆"
