@@ -60,31 +60,35 @@ struct DTView: View {
     @AppStorage("isFirstLaunching") var isFirstLaunching = true
     
     var body: some View {
-        ZStack{
-            GeometryReader { g in
-                Image("icon")
-                    .resizable()
-                    .cornerRadius(20)
-                    .position(x: g.size.width / 2, y: g.size.height / 3.5)
-                    .frame(width: g.size.width/4, height: g.size.width/4)
-                    
-            }
-            GeometryReader { g in
-                VStack {
-                    
-                    Text("iOSMan")
-                        .fontWeight(.bold)
-                        .font(.system(size: g.size.height/10))
-                        .position(x: g.size.width / 2, y: g.size.height / 1.8)
-                    Button(action: {
-                        isFirstLaunching = true
-                    }, label: {
-                        Text("reset")
-                    })
-                    .position(x: g.size.width / 2, y: g.size.height / 7)
-                    .buttonStyle(GrowingButton())
-                }
-            }
+        VStack{
+            Spacer()
+            //            ZStack{
+            //                GeometryReader { g in
+            appIcon(size: 200)
+            //                        .position(x: g.size.width / 2, y: g.size.height / 3.5)
+            
+            //                }
+            //                GeometryReader { g in
+                
+                Text("iOSMan")
+                    .fontWeight(.bold)
+                    .font(.system(size: 50))
+                //                            .font(.system(size: g.size.height/10))
+                //                            .position(x: g.size.width / 2, y: g.size.height / 1.8)
+                Button(action: {
+                    isFirstLaunching = true
+                }, label: {
+                    Text("reset")
+                })
+                //                        .position(x: g.size.width / 2, y: g.size.height / 7)
+                .buttonStyle(GrowingButton())
+            Spacer()
+            Text("By Jonathan0827")
+                .foregroundColor(.secondary)
+                .fontWeight(.semibold)
+                .padding(10)
         }
+        
     }
 }
+

@@ -415,7 +415,7 @@ struct OnboardingView: View {
             print("Support Directory: \(supportDir)")
             print(executeSh("git --version"))
             print("checked git")
-            print(executeSh("cd \(manSupportDir) && [ -d \"iOSMan\" ] &&  echo \"iOSMan Dir found(removing old one).\";rm -rf ./iOSMan/ || echo \"iOSMan Dir not found.\";mkdir iOSMan"))
+            print(executeSh("cd \(manSupportDir) && [ -d \"iOSMan\" ] &&  echo \"iOSMan Dir found(removing old one).\";rm -rf ./iOSMan/ || echo \"iOSMan Dir not found.\";mkdir iOSMan;cd iOSMan;mkdir managedProjects"))
             
             print("Created iOSMan directory at Application Support: \(supportDir)")
             print(executeSh("cd \(supportDir) && git clone https://github.com/Jonathan0827/iOSManHelpers.git"))
