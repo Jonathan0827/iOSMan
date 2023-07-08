@@ -75,15 +75,41 @@ struct ProjSelectedView: View {
                 }
             }
             if showOpt {
-                ZStack{
-//                    Spacer()
-                    Rectangle()
-                        .fill(.opacity(0.1))
-                        .blur(radius: 150)
-                    VStack {
-                        Text("Options here")
-                            .font(.largeTitle)
-                            .fontWeight(.bold)
+                GeometryReader { g in
+                    
+                    ZStack{
+                        //                    Spacer()
+                        Rectangle()
+                            .fill(.opacity(0.1))
+                            .blur(radius: 150)
+                        VStack{
+                            Text("Options")
+                                .font(.system(size: g.size.height/15))
+                                .fontWeight(.bold)
+                            Section("Build"){
+                                HStack {
+                                    Button(action: {
+                                        
+                                    }, label: {
+                                        Text("Build .ipa")
+                                            .font(.system(size: g.size.height/40))
+                                            .fontWeight(.bold)
+                                    })
+                                    .buttonStyle(GrowingButtonBlue())
+                                    Button(action: {
+                                        
+                                    }, label: {
+                                        Text("Build .app")
+                                            .foregroundColor(.white)
+                                            .font(.system(size: g.size.height/40))
+                                            .fontWeight(.bold)
+                                    })
+                                    .buttonStyle(GrowingButton())
+                                }
+                            }
+                            Spacer()
+                        }
+                        .position(x: g.size.width / 2, y: g.size.height / 3)
                     }
                 }
             }

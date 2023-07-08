@@ -27,10 +27,12 @@ struct OnboardingView: View {
     @AppStorage("brewPath") var brewPath = ""
     @State var showLoading: Bool = false
     @State var showLoadingGh: Bool = false
+    @State var showCompleteGhInstallation = false
     @AppStorage("githubUserName") var githubUserName = ""
     @AppStorage("githubUserAvatar") var githubUserAvatar = ""
-
     @AppStorage("userName") var userName = ""
+    @AppStorage("supportDir") var supportDir = ""
+
     var body: some View {
         VStack{
             if viewLoaded {
@@ -115,9 +117,13 @@ struct OnboardingView: View {
                                                 })
                                                 ghInstallLog.append("✅ jq Installed!\n")
                                             }
-                                            ghInstallLog.append("Configuring GitHub CLI")
+                                            ghInstallLog.append("Configuring GitHub CLI\n")
                                             print(runShFile("setupGh.sh"))
-
+                                            ghInstallLog.append("✅ Done!")
+                                            withAnimation {
+                                                showLoadingGh = false
+                                                showCompleteGhInstallation = true
+                                            }
                                         })
                                     }
                                 }, label: {
@@ -132,6 +138,19 @@ struct OnboardingView: View {
                                 ProgressView()
                                     .padding()
                             }
+                            else if showCompleteGhInstallation {
+                                Button(action: {
+                                    withAnimation {
+                                        installGh = false
+                                        askUserInformation = true
+                                    }
+                                }, label: {
+                                    Text("Complete GitHub CLI installation")
+                                        .font(.title)
+                                        .fontWeight(.bold)
+                                })
+                                .buttonStyle(GrowingButtonBlue())
+                            }
                         }
                         if showNoBrewInstalled {
                             Text("Brew is not installed. Install brew to fix this")
@@ -143,10 +162,10 @@ struct OnboardingView: View {
                                     }
                                 }
                             Button(action: {
-                                ghInstallLog.append("\n\(executeSh("/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\""))")
-                                ghInstallLog.append("✅ Brew Installed!")
+                                ghInstallLog.append("Finish installation on terminal and restart iOSMan")
+                                runShFile("installBrew.sh")
                             }, label: {
-                                Text("Install Brew (This may take up to an hour)")
+                                Text("Install Brew")
                                     .fontWeight(.bold)
                                     .font(.title2)
                             })
@@ -313,6 +332,8 @@ struct OnboardingView: View {
                             HStack{
                                 Image(systemName: "arrow.left")
                                 Text("No it's not me")
+                                    .foregroundColor(.white)
+                                    .fontWeight(.bold)
                             }
                         })
                         .buttonStyle(GrowingButton())
@@ -331,6 +352,7 @@ struct OnboardingView: View {
                         }, label: {
                             HStack{
                                 Text("Yes it's me")
+                                    .fontWeight(.bold)
                                 Image(systemName: "arrow.right")
                             }
                         })
@@ -349,7 +371,8 @@ struct OnboardingView: View {
                 
                     .fontWeight(.semibold)
                     .onAppear {
-                        DispatchQueue.main.asyncAfter(deadline: .now()+1.0, execute: {
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now()+2.0, execute: {
                             withAnimation {
                                 isFirstLaunching = false
                             }
@@ -377,16 +400,31 @@ struct OnboardingView: View {
             Text("Don't leave textfield blank!")
         }
         .onAppear {
-            print(executeSh("cd ~/ && rm -rf ./iOSManHelpers"))
-            print("removed old iOSManHelpers")
+            let fileManager = FileManager.default
+            let appSupportURL = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
+            let manSupportURL = appSupportURL.appendingPathComponent("iOSMan")
+            let man = manSupportURL.absoluteString
+            let sup = appSupportURL.absoluteString
+            let manInd = man.count
+            let supInd = sup.count
+            supportDir = String(man.suffix(manInd-7))
+            supportDir = supportDir.replacingOccurrences(of: "%20", with: "\\ ")
+            let manSupportDir = String(sup.suffix(supInd-7)).replacingOccurrences(of: "%20", with: "\\ ")
+            print(supportDir)
+            print(manSupportDir)
+            print("Support Directory: \(supportDir)")
             print(executeSh("git --version"))
             print("checked git")
-            print(executeSh("cd ~/ && git clone https://github.com/Jonathan0827/iOSManHelpers.git"))
-            print("downloaded iOSManHelpers")
-            print(executeSh("for file in ~/iOSManHelpers/*\n    do\n    chmod +x \"$file\"\ndone"))
+            print(executeSh("cd \(manSupportDir) && [ -d \"iOSMan\" ] &&  echo \"iOSMan Dir found(removing old one).\";rm -rf ./iOSMan/ || echo \"iOSMan Dir not found.\";mkdir iOSMan"))
+            
+            print("Created iOSMan directory at Application Support: \(supportDir)")
+            print(executeSh("cd \(supportDir) && git clone https://github.com/Jonathan0827/iOSManHelpers.git"))
+            print("Cloned iOSManHelpers repo")
+            print(supportDir)
+            print(executeSh("cd \(supportDir)/iOSManHelpers && for file in ./ *\n    do\n    echo \"$file\"\ndone"))
+            print(executeSh("for file in \(supportDir) *\ndo\nchmod +x \"$file\"\ndone"))
             print("chmod done")
-            print(executeSh("rm -rf ~/iOSManHelpers/.git"))
-            print("removed git folder")
+            
             DispatchQueue.main.asyncAfter(deadline: .now()+0.5, execute: {
                 withAnimation { viewLoaded = true }
             })
@@ -417,7 +455,7 @@ struct OnboardingView: View {
         catch let error as NSError{
             print(error)
         }
-        return valueToReturn
+        return valueToReturn // 0: name 1: account name bio: bio msg (maybe blank)
     }
     func CPUTypeInt() ->Int {
         

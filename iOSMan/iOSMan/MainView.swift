@@ -9,24 +9,17 @@ import SwiftUI
 
 struct MainView: View {
     @AppStorage("isFirstLaunching") var isFirstLaunching = true
+    @AppStorage("supportDir") var supportDir = ""
     @State var managedProjects = ["test"]
+    @State var notProjectButList = ["Home", ""]
     @State var selectKeeper = Set<String>()
-
     @State var selectedProj: String = ""
     let hour = Calendar.current.component(.hour, from: Date())
     var body: some View {
         NavigationSplitView{
-            
-//            ProjSelectionView(projectName: "Test Xcodeproj", projectType: 2, projectPath: URL(string: "file://users/jonathanlim/desktop/coding/wonsinheungmid/")!, projectFilePath: URL(string: "file://users/jonathanlim/desktop/coding/wonsinheungmid/wonsinheungmid/wonsinheungmid.xcworkspace")!)
-//            List(selection: $selectKeeper) {
-//            Section {
-//                NavigationLink(destination: DTView(), label: {
-//                    Text("Home")
-//                })
-//            }
-            
+//                List()
                 List(managedProjects, id: \.self, selection: $selectKeeper){ name in
-                    ProjSelectionView(projectName: "WonsinheungMid", projectType: false, projectPath: URL(string: "file://Users/jonathanlim/desktop/coding/WonsinheungMid")!, projectFilePath: URL(string: "file://Users/jonathanlim/desktop/coding/WonsinheungMid/WonsinheungMid/WonsinheungMid.xcworkspace")!)
+                    ProjSelectionView(projectName: name, projectType: false, projectPath: URL(string: "file://Users/jonathanlim/desktop/coding/WonsinheungMid")!, projectFilePath: URL(string: "file://Users/jonathanlim/desktop/coding/WonsinheungMid/WonsinheungMid/WonsinheungMid.xcworkspace")!)
                     
                 }
 //            }
@@ -65,23 +58,33 @@ struct MainView: View {
 }
 struct DTView: View {
     @AppStorage("isFirstLaunching") var isFirstLaunching = true
-
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
-            Button(action: {
-                isFirstLaunching = true
-            }, label: {
-                Text("reset")
-            })
-            Button(action: {
-                print(executeSh("brew"))
-            }, label: {
-                Text("gh")
-            })
+        ZStack{
+            GeometryReader { g in
+                Image("icon")
+                    .resizable()
+                    .cornerRadius(20)
+                    .position(x: g.size.width / 2, y: g.size.height / 3.5)
+                    .frame(width: g.size.width/4, height: g.size.width/4)
+                    
+            }
+            GeometryReader { g in
+                VStack {
+                    
+                    Text("iOSMan")
+                        .fontWeight(.bold)
+                        .font(.system(size: g.size.height/10))
+                        .position(x: g.size.width / 2, y: g.size.height / 1.8)
+                    Button(action: {
+                        isFirstLaunching = true
+                    }, label: {
+                        Text("reset")
+                    })
+                    .position(x: g.size.width / 2, y: g.size.height / 7)
+                    .buttonStyle(GrowingButton())
+                }
+            }
         }
     }
 }
