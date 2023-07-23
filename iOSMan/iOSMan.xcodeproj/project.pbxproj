@@ -20,6 +20,7 @@
 		91AC82902A0783630088E802 /* iOSManUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AC828F2A0783630088E802 /* iOSManUITestsLaunchTests.swift */; };
 		91AC829E2A0784B60088E802 /* I_Run_Shell_Script.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AC829D2A0784B60088E802 /* I_Run_Shell_Script.swift */; };
 		91AC82A12A07870C0088E802 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AC82A02A07870C0088E802 /* OnboardingView.swift */; };
+		91E9A3E12A5BE88500B99F3E /* ManageNewProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E9A3E02A5BE88500B99F3E /* ManageNewProject.swift */; };
 		91F631592A307F12002863EC /* icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F631582A307F12002863EC /* icon.swift */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +59,7 @@
 		91AC828F2A0783630088E802 /* iOSManUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSManUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		91AC829D2A0784B60088E802 /* I_Run_Shell_Script.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = I_Run_Shell_Script.swift; sourceTree = "<group>"; };
 		91AC82A02A07870C0088E802 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		91E9A3E02A5BE88500B99F3E /* ManageNewProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageNewProject.swift; sourceTree = "<group>"; };
 		91F631582A307F12002863EC /* icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = icon.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -111,6 +113,7 @@
 			children = (
 				918CD3322A0A6F6E00BF730F /* ProjectViews.swift */,
 				91F631582A307F12002863EC /* icon.swift */,
+				91E9A3E02A5BE88500B99F3E /* ManageNewProject.swift */,
 				918CD3302A0A6BE100BF730F /* MainView.swift */,
 				914E504F2A07DF3800F16BB0 /* userStruct.swift */,
 				91AC82712A0783610088E802 /* iOSManApp.swift */,
@@ -293,6 +296,7 @@
 				91F631592A307F12002863EC /* icon.swift in Sources */,
 				91AC829E2A0784B60088E802 /* I_Run_Shell_Script.swift in Sources */,
 				914E50502A07DF3800F16BB0 /* userStruct.swift in Sources */,
+				91E9A3E12A5BE88500B99F3E /* ManageNewProject.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

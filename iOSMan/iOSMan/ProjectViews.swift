@@ -10,11 +10,9 @@ import SwiftUI
 struct ProjSelectionView: View {
     let projectName: String
     let projectType: Bool
-    let projectPath: URL
-    let projectFilePath: URL
+    let projectPath: String
     var body: some View {
-        NavigationLink(destination: ProjSelectedView(projectName: projectName, projectType: projectType, projectPath: projectPath, projectFilePath: projectFilePath), label: {
-            
+        NavigationLink(destination: ProjSelectedView(projectName: projectName, projectType: projectType, projectPath: projectPath), label: {
             VStack(alignment: .leading) {
                 Text(projectName)
                     .fontWeight(.bold)
@@ -39,8 +37,7 @@ struct ProjSelectionView: View {
 struct ProjSelectedView: View {
     let projectName: String
     let projectType: Bool
-    let projectPath: URL
-    let projectFilePath: URL
+    let projectPath: String
     @State var smallFont = false
     @State var showTitle: Bool = false
     @State var showFT: Bool = false
@@ -96,6 +93,7 @@ struct ProjSelectedView: View {
                                             .fontWeight(.bold)
                                     })
                                     .buttonStyle(GrowingButtonBlue())
+                                    .padding(.trailing, 10)
                                     Button(action: {
                                         
                                     }, label: {

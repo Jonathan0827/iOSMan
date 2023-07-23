@@ -21,6 +21,7 @@ struct OnboardingView: View {
     @State var askUserInformation: Bool = false
     @State var githubUserNameIsNotEmpty: Bool = false
     @State var githubUserNameIsEmpty: Bool = false
+    @State var IAmNotIt: Bool = false
     @State var endSetup: Bool = false
     @State var ghShortInst: String = "Before we start, let's install GitHub CLI"
     @AppStorage("isFirstLaunching") var isFirstLaunching = true
@@ -163,7 +164,7 @@ struct OnboardingView: View {
                                 }
                             Button(action: {
                                 ghInstallLog.append("Finish installation on terminal and restart iOSMan")
-                                runShFile("installBrew.sh")
+                                print(runShFile("installBrew.sh"))
                             }, label: {
                                 Text("Install Brew")
                                     .fontWeight(.bold)
@@ -389,15 +390,15 @@ struct OnboardingView: View {
                 //                .buttonStyle(GrowingButtonBlue())
             }
         }
-        .alert("Oops!", isPresented: $isNotValidGitHubAccount) {
+        .alert("What!", isPresented: $isNotValidGitHubAccount) {
             Button("Okay") {}
         } message: {
             Text("Coudln't find GitHub Account named '\(githubUserName)'")
         }
-        .alert("Hey!", isPresented: $githubUserNameIsEmpty) {
+        .alert("What!", isPresented: $githubUserNameIsEmpty) {
             Button("Okay") {}
         } message: {
-            Text("Don't leave textfield blank!")
+            Text("Don't leave textfield blank")
         }
         .onAppear {
             let fileManager = FileManager.default

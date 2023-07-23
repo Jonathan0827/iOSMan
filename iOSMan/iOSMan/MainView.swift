@@ -14,12 +14,29 @@ struct MainView: View {
     @State var notProjectButList = ["Home", ""]
     @State var selectKeeper = Set<String>()
     @State var selectedProj: String = ""
+//    MARK: alert varibles
+    @State var showAlert: Bool = false
+    @State var alertTitle: String = ""
+    @State var alertDismiss: String = ""
+    @State var alertMsg: String = ""
+    
     let hour = Calendar.current.component(.hour, from: Date())
     var body: some View {
         NavigationSplitView{
 //                List()
+            NavigationLink(destination: DTView(), label: {Text("Home")})
+                .buttonStyle(.borderless)
+            Button(action: {
+                let projInfo = manNewProj()
+                if projInfo.canceled{
+                    print("Canceled")
+                } else {
+//                    MARK: Manage New Project
+                }
+            }, label: {Text("New")})
+                .buttonStyle(.borderless)
                 List(managedProjects, id: \.self, selection: $selectKeeper){ name in
-                    ProjSelectionView(projectName: name, projectType: false, projectPath: URL(string: "file://Users/jonathanlim/desktop/coding/WonsinheungMid")!, projectFilePath: URL(string: "file://Users/jonathanlim/desktop/coding/WonsinheungMid/WonsinheungMid/WonsinheungMid.xcworkspace")!)
+                    ProjSelectionView(projectName: name, projectType: false, projectPath: "/Users/jonathanlim/desktop/coding/WonsinheungMid/WonsinheungMid.xcworkspace")
                     
                 }
 //            }
@@ -39,6 +56,11 @@ struct MainView: View {
             DTView()
 //                .navigationTitle(gday())
         }
+        .alert(isPresented: $showAlert) {
+                    Alert(title: Text(alertTitle),
+                          message: Text(alertMsg),
+                          dismissButton: .default(Text(alertDismiss)))
+                }
     }
     func gday() -> String{
         var timeDesc = ""
