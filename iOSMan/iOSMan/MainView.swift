@@ -11,7 +11,7 @@ struct MainView: View {
     @AppStorage("isFirstLaunching") var isFirstLaunching = true
     @AppStorage("supportDir") var supportDir = ""
     @State var managedProjects = ["test"]
-    @State var notProjectButList = ["Home", ""]
+    @State var notProjectButList = ["Home", "New"]
     @State var selectKeeper = Set<String>()
     @State var selectedProj: String = ""
 //    MARK: alert varibles
@@ -36,7 +36,7 @@ struct MainView: View {
             }, label: {Text("New")})
                 .buttonStyle(.borderless)
                 List(managedProjects, id: \.self, selection: $selectKeeper){ name in
-                    ProjSelectionView(projectName: name, projectType: false, projectPath: "/Users/jonathanlim/desktop/coding/WonsinheungMid/WonsinheungMid.xcworkspace")
+                    ProjSelectionView(name: name, type: false, path: "/Users/jonathanlim/desktop/coding/WonsinheungMid/WonsinheungMid.xcworkspace", isNotManaged: false)
                     
                 }
 //            }

@@ -8,29 +8,53 @@
 import SwiftUI
 
 struct ProjSelectionView: View {
-    let projectName: String
-    let projectType: Bool
-    let projectPath: String
+    let name: String
+    let type: Bool?
+    let path: String?
+    let isNotManaged: Bool
     var body: some View {
-        NavigationLink(destination: ProjSelectedView(projectName: projectName, projectType: projectType, projectPath: projectPath), label: {
-            VStack(alignment: .leading) {
-                Text(projectName)
-                    .fontWeight(.bold)
-                    .font(.largeTitle)
-                if projectType {
-                    Text("Xcode Project")
-                        .foregroundColor(.secondary)
-                        .fontWeight(.semibold)
-                        .font(.title3)
-                } else {
-                    Text("Xcode Workspace")
-                        .foregroundColor(.secondary)
-                        .fontWeight(.semibold)
-                        .font(.title3)
+        if !isNotManaged {
+            NavigationLink(destination: ProjSelectedView(projectName: name, projectType: type!, projectPath: path!), label: {
+                VStack(alignment: .leading) {
+                    Text(name)
+                        .fontWeight(.bold)
+                        .font(.largeTitle)
+                    
+                    if type! {
+                        Text("Xcode Project")
+                            .foregroundColor(.secondary)
+                            .fontWeight(.semibold)
+                            .font(.title3)
+                    } else {
+                        Text("Xcode Workspace")
+                            .foregroundColor(.secondary)
+                            .fontWeight(.semibold)
+                            .font(.title3)
+                    }
+                }
+            })
+            .padding(5)
+        } else {
+            HStack() {
+//                Text(name)
+//                    .fontWeight(.bold)
+//                    .font(.largeTitle)
+//                
+                if name == "Home" {
+                    Image(systemName: "house")
+                } else if name == "New" {
+                    Button(action: {
+                        let projInfo = manNewProj()
+                        if projInfo.canceled{
+                            print("Canceled")
+                        } else {
+        //                    MARK: Manage New Project
+                        }
+                    }, label: {Text("New")})
+                    Image(systemName: "plus.rectangle.on.folder")
                 }
             }
-            .padding(5)
-        })
+        }
     }
 }
 
